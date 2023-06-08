@@ -1,8 +1,10 @@
 const express = require('express')
+const mysql = require('mysql')
 const bp = require("body-parser")
 const qr = require('qrcode')
 const app = express()
 const port = 3000
+require('dotenv').config()
 
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
@@ -26,9 +28,6 @@ app.post('/createqr', (req, res) => {
  
   if (user_url.length === 0) 
   {status = 'Url is empty';}
-
-  
-
   res.render('index', 
     { 
       title: 'QR Easy: สร้าง QR Code อย่างง่าย ๆ', 
@@ -53,10 +52,32 @@ app.get('/genqr/', (req, res) => {
     });
     res.end(img); 
   });
+})
+
+app.get('/checkDB/', (req, res) => {
+  const charset = process.env.CONNECTION_MYSQL_CHARSET  
+  const db_name = process.env.CONNECTION_MYSQL_DATABASE
+  const host = process.env.CONNECTION_MYSQL_SERVER
+  const user = process.env.CONNECTION_MYSQL_USERNAME
+  const password = process.env.CONNECTION_MYSQL_PASSWORD
+  let dbConfig
+    dbConfig = {
+      host: host,
+      user: user,
+      password: password,
+      database: db_name,
+      charset: charset
+    }
+    console.log(dbConfig)
+  let pool = mysql.createPool(dbConfig)
+
+  pool.query('select * from test_db', function (error, results, fields) {
+    if (error) throw error;
+    res.send(results);
+  });
 
 
 })
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
