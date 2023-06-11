@@ -2,12 +2,19 @@ const express = require('express')
 const mysql = require('mysql')
 const bp = require("body-parser")
 const qr = require('qrcode')
+const pg = require('pg')
 const app = express()
+
+
 const port = 3000
 require('dotenv').config()
 
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
+//Root
+app.use('/db/mysql', require("./router/mysql_db"))
+app.use('/db/pg', require("./router/pg_db"))
+
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
   
@@ -54,28 +61,23 @@ app.get('/genqr/', (req, res) => {
   });
 })
 
+app.get('/checkPG/', async (req, res) => {
+  const client = new Client()
+  await client.connect()
+   
+  try {
+    const res = await client.query('SELECT $1::text as message', ['Hello world!'])
+    console.log(res.rows[0].message) // Hello world!
+ } catch (err) {
+    console.error(err);
+ } finally {
+    await client.end()
+ }
+})
+
+
 app.get('/checkDB/', (req, res) => {
-  const charset = process.env.CONNECTION_MYSQL_CHARSET  
-  const db_name = process.env.CONNECTION_MYSQL_DATABASE
-  const host = process.env.CONNECTION_MYSQL_SERVER
-  const user = process.env.CONNECTION_MYSQL_USERNAME
-  const password = process.env.CONNECTION_MYSQL_PASSWORD
-  let dbConfig
-    dbConfig = {
-      host: host,
-      user: user,
-      password: password,
-      database: db_name,
-      charset: charset
-    }
-    console.log(dbConfig)
-  let pool = mysql.createPool(dbConfig)
-
-  pool.query('select * from test_db', function (error, results, fields) {
-    if (error) throw error;
-    res.send(results);
-  });
-
+ 
 
 })
 
