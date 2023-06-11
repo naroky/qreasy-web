@@ -1,12 +1,10 @@
 const express = require('express')
-const mysql = require('mysql')
+
 const bp = require("body-parser")
 const qr = require('qrcode')
-const pg = require('pg')
+
 const app = express()
-
-
-const port = 3000
+const port = process.env.LISTEN_PORT
 require('dotenv').config()
 
 app.use(bp.urlencoded({ extended: false }));
