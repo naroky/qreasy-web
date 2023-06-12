@@ -1,21 +1,17 @@
 const express = require('express')
-
 const bp = require("body-parser")
 const qr = require('qrcode')
+require('dotenv').config()
 
 const app = express()
 const port = process.env.LISTEN_PORT
-require('dotenv').config()
 
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
-//Root
 app.use('/db/mysql', require("./router/mysql_db"))
 app.use('/db/pg', require("./router/pg_db"))
-
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
-  
   res.render('index', 
   { 
     title: 'QR Easy: สร้าง QR Code อย่างง่าย ๆ', 
@@ -57,26 +53,6 @@ app.get('/genqr/', (req, res) => {
     });
     res.end(img); 
   });
-})
-
-app.get('/checkPG/', async (req, res) => {
-  const client = new Client()
-  await client.connect()
-   
-  try {
-    const res = await client.query('SELECT $1::text as message', ['Hello world!'])
-    console.log(res.rows[0].message) // Hello world!
- } catch (err) {
-    console.error(err);
- } finally {
-    await client.end()
- }
-})
-
-
-app.get('/checkDB/', (req, res) => {
- 
-
 })
 
 app.listen(port, () => {
