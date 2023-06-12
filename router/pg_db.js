@@ -16,14 +16,14 @@ router.get('/checkDB', async (req, res) => {
   const host = process.env.CONNECTION_PG_SERVER
   const user = process.env.CONNECTION_PG_USERNAME
   const password = process.env.CONNECTION_PG_PASSWORD
-  const port = process.env.CONNECTION_PG_PORT
+  const PG_port = process.env.CONNECTION_PG_PORT
   let dbConfig
     dbConfig = {
             user: user,
             host: host,
             database: db_name,
             password: password,
-            port: port
+            port: PG_port
     }
     console.log(dbConfig)
   const client = new pg.Client(dbConfig)
@@ -32,8 +32,6 @@ router.get('/checkDB', async (req, res) => {
   let result = await client.query('SELECT * from test_db')
   res.send(result.rows)
   await client.end()
-
-
 })
 
 module.exports = router
