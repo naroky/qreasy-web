@@ -5,12 +5,14 @@ require('dotenv').config()
 
 const app = express()
 const port = 3000//process.env.LISTEN_PORT
-
+app.set('view engine', 'ejs')
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
+/*
 app.use('/db/mysql', require("./router/mysql_db"))
 app.use('/db/pg', require("./router/pg_db"))
-app.set('view engine', 'ejs')
+*/
+
 app.get('/', (req, res) => {
   res.render('index', 
   { 
