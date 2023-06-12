@@ -17,22 +17,19 @@ router.get('/checkDB', (req, res) => {
   const host = process.env.CONNECTION_MYSQL_SERVER
   const user = process.env.CONNECTION_MYSQL_USERNAME
   const password = process.env.CONNECTION_MYSQL_PASSWORD
-  let dbConfig
-    dbConfig = {
+  let mysql_dbConfig
+    mysql_dbConfig = {
       host: host,
       user: user,
       password: password,
       database: db_name,
       charset: charset
     }
-    console.log(dbConfig)
-  let pool = mysql.createPool(dbConfig)
-
+    console.log(mysql_dbConfig)
+  let pool = mysql.createPool(mysql_dbConfig)
   pool.query('select * from test_db', function (error, results, fields) {
     if (error) throw error;
     res.send(results);
   });
-
 })
-
 module.exports = router
