@@ -4,7 +4,7 @@ const qr = require('qrcode')
 require('dotenv').config()
 
 const app = express()
-const port = process.env.LISTEN_PORT
+const port = 3000//process.env.LISTEN_PORT
 
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
