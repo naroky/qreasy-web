@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 })
 app.post('/createqr', (req, res) => {
   const user_url = req.body.user_url;
-  let qrsrc = ''
+
   let status = ''
  
   if (user_url.length === 0) 
