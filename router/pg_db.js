@@ -33,5 +33,4 @@ router.get('/checkDB', async (req, res) => {
   res.send(result.rows)
   await client.end()
 })
-
 module.exports = router
