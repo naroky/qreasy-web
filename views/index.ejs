@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+    .center {
+        text-align: center;
+    }
+    </style>
 <title><%= title %></title>
 </head>
 <body>
-
+<section class="center">
 <h1><%= head_line_1 %></h1>
 <form method="post" action="createqr">
-Enter URL :<input type="text" name="user_url" /> <input type="submit" name="submit" value="สร้าง QR Code" />
+Enter URL : <input type="text" name="user_url" /> <input type="submit" name="submit" value="สร้าง QR Code" />
 </form>
-<p><img src='./genqr/?user_url=<%= user_url %>' alt='Qr'/></p>
+<p ><img src='./genqr/?user_url=<%= user_url %>' alt='Qr'/></p>
 <div><%= status%></div>
+</section>
 </body>
 </html>
