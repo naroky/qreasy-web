@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8553499364283801"
     crossorigin="anonymous"></script>
@@ -7,21 +7,34 @@
     src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 </script>    
 <style>
+    .box {margin: 25px 25px 25px 25px;}
     .center {
         text-align: center;
     }
+    #id_headline {margin: 10px 10px 10px 10px;}
+    #id_contentbox {margin: 100px 100px 100px 100px;}
     </style>
-<title><%= title %></title>
+<title>Web Service for simple generate QR Code Image</title>
 </head>
 <body>
 <amp-auto-ads type="adsense" data-ad-client="ca-pub-8553499364283801"></amp-auto-ads>
+<section id="id_headline">
+    <div class="box">
+        <h1>qreasy.info<h1>
+        <h5>Web Service for simple generate QR Code Image</h5>    
+    </div>    
+</section>
 <section class="center">
-<h1><%= head_line_1 %></h1>
-<form method="post" action="createqr">
-Enter URL : <input type="text" name="user_url" /> <input type="submit" name="submit" value="สร้าง QR Code" />
-</form>
-<p ><img src='./genqr/?user_url=<%= user_url %>' alt='Qr'/></p>
+    <div class="box"><h2>Input Your URL for generate QR Code Image</h2></div>
+    <div class="box">
+        <form method="post" action="createqr">
+            <input type="text" name="user_url" style="width: 500px; height: 50px; " /> 
+            <input type="submit" name="submit" value="Generate" style="height: 50px;" />
+        </form>
+    </div>
+<img src='./genqr/?user_url=<%= user_url %>' alt='QrCode'/>
 <div><%= status%></div>
+</p>
 </section>
 </body>
 </html>

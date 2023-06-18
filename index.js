@@ -15,37 +15,42 @@ app.use('/db/pg', require("./router/pg_db"))
 app.get('/', (req, res) => {
   res.render('index', 
   { 
-    title: 'QR Easy: สร้าง QR Code อย่างง่าย ๆ', 
-    head_line_1 : 'ใส่ URL ของคุณ',
-    content : '', 
-    user_url : 'Hello',
+    user_url : "Hello World",
     status : "Ready!!!"
   })
-  //res.send('Hello World!')
 })
-app.post('/createqr', (req, res) => {
-  const user_url = req.body.user_url;
 
-  let status = ''
- 
+app.get('/createqr',(req,res) => {
+  res.writeHead(302, {
+    'Location': '/'
+  });
+  res.end()
+})
+
+app.post('/createqr', (req, res) => {
+  let user_url = req.body.user_url;
+
+  let status = 'Generate "'+user_url+'" is Success'
   if (user_url.length === 0) 
-  {status = 'Url is empty';}
+  {
+    status ='Url is empty'
+    user_url = status
+  }
   res.render('index', 
     { 
-      title: 'QR Easy: สร้าง QR Code อย่างง่าย ๆ', 
-      head_line_1 : 'ใส่ URL ของคุณ',
-      content : '', 
       user_url : user_url,
       status : status
     })
-    //res.send('Hello World!')
 })
 
 app.get('/genqr/', (req, res) => {
   const user_url = req.query.user_url
-  qr.toDataURL(user_url, (err, src) => {
+  const opt = {
+    scale:4,
+    width:300
+  }
+  qr.toDataURL(user_url,opt, (err, src) => {
     if (err) res.send("Error occured")
-    //console.log(src)
     let base64Image = src.split(",");
     let img = Buffer.from(base64Image[1], 'base64');
     res.writeHead(200, {
