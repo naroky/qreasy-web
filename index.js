@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const bp = require("body-parser")
 const qr = require('qrcode')
 require('dotenv').config()
@@ -18,6 +19,10 @@ app.get('/', (req, res) => {
     user_url : "Hello World",
     status : "Ready!!!"
   })
+})
+
+app.get('/:filename', function(req,res){
+  res.sendFile(path.join(__dirname,'/'+req.params.filename))
 })
 
 app.get('/createqr',(req,res) => {
