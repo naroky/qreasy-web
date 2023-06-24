@@ -21,8 +21,8 @@ app.get('/', (req, res) => {
   })
 })
 
-app.get('/:filename', function(req,res){
-  res.sendFile(path.join(__dirname,'/'+req.params.filename))
+app.get('/Ads.txt', function(req,res){
+  res.sendFile(path.join(__dirname,'/Ads.txt'))
 })
 
 app.get('/createqr',(req,res) => {
