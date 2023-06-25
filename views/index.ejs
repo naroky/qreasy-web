@@ -3,35 +3,49 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8553499364283801"
-    crossorigin="anonymous"></script>   
+     crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
-    .box {margin: 25px 25px 25px 25px;}
     .center {
         text-align: center;
     }
     #id_headline {margin: 10px 10px 10px 10px;}
     #id_contentbox {margin: 100px 100px 100px 100px;}
-    </style>
+</style>
 <title>Web Service for simple generate QR Code Image</title>
 </head>
 <body>
 <section id="id_headline">
-    <div class="box">
+    <div id="header" class="container">
         <h1>qreasy.info<h1>
-        <p>Web Service for simple generate QR Code Image</p>    
+        <p class="h5">Web Service for simple generate QR Code Image</p>    
     </div>    
 </section>
-<section class="center">
-    <div class="box"><h2>Input Your URL for generate QR Code Image</h2></div>
-    <div class="box">
-        <form method="post" action="createqr">
-            <label for="user_url">Enter URL or Message for convert to QR Code:</label>
-            <input type="text" name="user_url" style="width: 500px; height: 50px; " /> 
-            <input type="submit" name="submit" value="Generate" style="height: 50px;" />
-        </form>
+<section id="id_contentbox" class="center">
+    <div id="content" class="container">
+        <div class="row">
+            <h2>Input Your URL for generate QR Code Image</h2>
+        </div>
+        <div class="row justify-content-center">
+                <form class="col-md-9" style="background-color: bisque;" method="post" action="createqr">
+                    <div class="mb-3 ">
+                        <label class="form-label" for="user_url"><h5>Enter URL or Message for convert to QR Code:</h5></label>
+                        <input class="form-control" id="user_url" type="text" name="user_url" /> 
+                    </div>
+                    <div class="mb-3">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Generate" style="height: 50px;" />
+                    </div>
+                </form>
+    
+        </div>
+        <div class="row">
+            <img src='./genqr/?user_url=<%= user_url %>' alt='QrCode' width="350px" hight="350"/>
+        </div>
+        <div class="row">
+            <div class="container-xl"><%= status%></div>
+        </div>
     </div>
-<img src='./genqr/?user_url=<%= user_url %>' alt='QrCode'/>
-<div><%= status%></div>
 </section>
 </body>
 </html>

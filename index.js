@@ -51,8 +51,8 @@ app.post('/createqr', (req, res) => {
 app.get('/genqr/', (req, res) => {
   const user_url = req.query.user_url
   const opt = {
-    scale:4,
-    width:450
+    scale:6,
+    width:350
   }
   qr.toDataURL(user_url,opt, (err, src) => {
     if (err) res.send("Error occured")
