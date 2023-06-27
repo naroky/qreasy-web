@@ -66,6 +66,11 @@ app.get('/genqr/', (req, res) => {
   });
 })
 
+app.get('/robots.txt', function (req, res) {
+  res.type('text/plain');
+  res.send("User-agent: *\nDisallow: /");
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
