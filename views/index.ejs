@@ -39,11 +39,14 @@
                 </form>
     
         </div>
+        <div class="row">
+            <div class="container-xl"><%= status%></div>
+        </div>
         <div class="row justify-content-center">
             <img src='./genqr/?user_url=<%= user_url %>' alt='QrCode' style="width:350px"/>
         </div>
-        <div class="row">
-            <div class="container-xl"><%= status%></div>
+        <div class="row-md-9">
+            <a class="btn btn-primary btn-sm" href="./genqr/?user_url=<%= user_url %>" role="button">Download</a>
         </div>
     </div>
 </section>
