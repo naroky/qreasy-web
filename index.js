@@ -71,6 +71,11 @@ app.get('/robots.txt', function (req, res) {
   res.send("User-agent: *\nDisallow: /");
 });
 
+app.get('/ads.txt', function (req, res) {
+  res.type('text/plain');
+  res.send("google.com, pub-8553499364283801, DIRECT, f08c47fec0942fa0");
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
