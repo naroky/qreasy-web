@@ -25,6 +25,10 @@ app.get('/Ads.txt', function(req,res){
   res.sendFile(path.join(__dirname,'/Ads.txt'))
 })
 
+app.get('/ads.txt', function (req, res) {
+  res.sendFile(path.join(__dirname,'/Ads.txt'))
+});
+
 app.get('/createqr',(req,res) => {
   res.writeHead(302, {
     'Location': '/'
@@ -69,10 +73,6 @@ app.get('/genqr/', (req, res) => {
 app.get('/robots.txt', function (req, res) {
   res.type('text/plain');
   res.send("User-agent: *\nDisallow: /");
-});
-
-app.get('/ads.txt', function (req, res) {
-  res.sendFile(path.join(__dirname,'/Ads.txt'))
 });
 
 // ############## Routers ##############
