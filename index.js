@@ -72,8 +72,7 @@ app.get('/robots.txt', function (req, res) {
 });
 
 app.get('/ads.txt', function (req, res) {
-  res.type('text/plain');
-  res.send("google.com, pub-8553499364283801, DIRECT, f08c47fec0942fa0");
+  res.sendFile(path.join(__dirname,'/Ads.txt'))
 });
 
 // ############## Routers ##############
