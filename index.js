@@ -9,8 +9,8 @@ const port = 3000//process.env.LISTEN_PORT
 app.set('view engine', 'ejs')
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
-app.use('/db/mysql', require("./router/mysql_db"))
-app.use('/db/pg', require("./router/pg_db"))
+//app.use('/db/mysql', require("./router/mysql_db"))
+//app.use('/db/pg', require("./router/pg_db"))
 
 
 app.get('/', (req, res) => {
@@ -75,6 +75,9 @@ app.get('/ads.txt', function (req, res) {
   res.type('text/plain');
   res.send("google.com, pub-8553499364283801, DIRECT, f08c47fec0942fa0");
 });
+
+// ############## Routers ##############
+app.use("/poc/realdb/", require('./routers/poc/realdb.js'));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
