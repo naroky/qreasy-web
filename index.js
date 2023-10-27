@@ -8,6 +8,7 @@ require('dotenv').config()
 const app = express()
 const port = 3000//process.env.LISTEN_PORT
 app.set('view engine', 'ejs')
+app.disable('view cache');
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
