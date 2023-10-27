@@ -7,8 +7,9 @@ require('dotenv').config()
 
 const app = express()
 const port = 3000//process.env.LISTEN_PORT
-app.set('view engine', 'ejs')
 app.disable('view cache');
+app.set('view engine', 'ejs')
+
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
@@ -40,10 +41,13 @@ app.post('/createqr', (req, res) => {
   const captcha = req.body["g-recaptcha-response"]
   const secret_key = "6Lepa9MoAAAAACvgHqCh3i88y_ThcsZAF2_zmMfU"
   let status = 'Generate "'+user_url+'" is Success'
-  
+  let Qr_code ='<div class="row justify-content-center"><img src="./genqr/?user_url='+user_url+'" alt="QrCode" style="width:350px"/></div>'
+  let download = '<a class="btn btn-primary btn-sm" href="./genqr/?user_url='+user_url+'" role="button">Download</a>'
   if (captcha.length === 0) 
   {
     status = "Please check the the captcha form."
+    Qr_code = ''
+    download = ''
   }
   // verify recapcha
   const recapcha_url = 'https://www.google.com/recaptcha/api/siteverify?secret='+secret_key+'&response='+captcha
@@ -56,20 +60,28 @@ app.post('/createqr', (req, res) => {
       if (user_url.length === 0) 
       {
         status ='Url is empty'
+        Qr_code = ''
+        download = ''
       }
+
     }
     else
     {
       status = resObj["error-codes"]
+      Qr_code =''
+      download = ''
     }
   })
   .catch((error) => {
-    status ='error'
+    status ='System Error'
+    Qr_code =''
+    download = ''
   });
   res.render('result', 
   { 
     status : status,
-    user_url : user_url
+    QRCode : Qr_code,
+    Download : download
   })
 })
 

@@ -27,11 +27,10 @@
         <div class="row">
             <div class="container-xl"><%= status%></div>
         </div>
-        <div class="row justify-content-center">
-            <img src='./genqr/?user_url=<%= user_url %>' alt='QrCode' style="width:350px"/>
-        </div>
+        <%- QRCode %>
         <div class="row-md-9">
-            <a class="btn btn-primary btn-sm" href="./genqr/?user_url=<%= user_url %>" role="button">Download</a>
+            <%- Download %>
+            <a class="btn btn-primary btn-sm" href="/" role="button">Back to Home Page</a>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
