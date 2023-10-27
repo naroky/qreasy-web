@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const bp = require("body-parser")
 const qr = require('qrcode')
+const axios = require('axios').default;
 require('dotenv').config()
 
 const app = express()
@@ -37,19 +38,41 @@ app.get('/createqr',(req,res) => {
 })
 
 app.post('/createqr', (req, res) => {
-  let user_url = req.body.user_url;
-
+  const user_url = req.body.user_url
+  const captcha = req.body["g-recaptcha-response"]
+  const secret_key = "6Lepa9MoAAAAACvgHqCh3i88y_ThcsZAF2_zmMfU"
   let status = 'Generate "'+user_url+'" is Success'
-  if (user_url.length === 0) 
+  
+  if (captcha.length === 0) 
   {
-    status ='Url is empty'
-    user_url = status
+    status = "Please check the the captcha form."
   }
+  // verify recapcha
+  const recapcha_url = 'https://www.google.com/recaptcha/api/siteverify?secret='+secret_key+'&response='+captcha
+  axios.get(recapcha_url).then((response) => {
+    // handle success
+    let resObj = JSON.stringify(response)
+    console.log(resObj);
+    if (resObj.success)
+    {
+      if (user_url.length === 0) 
+      {
+        status ='Url is empty'
+      }
+    }
+    else
+    {
+      status = resObj["error-codes"]
+    }
+  })
+  .catch((error) => {
+    status ='error'
+  });
   res.render('index', 
-    { 
-      user_url : user_url,
-      status : status
-    })
+  { 
+    status : status,
+    user_url : user_url
+  })
 })
 
 app.get('/genqr/', (req, res) => {

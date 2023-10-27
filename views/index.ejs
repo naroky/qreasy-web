@@ -3,15 +3,14 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<style>
-    .center {
-        text-align: center;
-    }
-    #id_headline {margin: 10px 10px 10px 10px;}
-    #id_contentbox {margin: 100px 100px 100px 100px;}
-</style>
-<title>Web Service for simple generate QR Code Image</title>
+    <style>
+        .center {
+            text-align: center;
+        }
+        #id_headline {margin: 10px 10px 10px 10px;}
+        #id_contentbox {margin: 100px 100px 100px 100px;}
+    </style>
+    <title>Web Service for simple generate QR Code Image</title>
 </head>
 <body>
 <section id="id_headline">
@@ -41,11 +40,11 @@
                         <label class="form-label" for="user_url"><h5>Enter URL or Message for convert to QR Code:</h5></label>
                         <input class="form-control" id="user_url" type="text" name="user_url" /> 
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6Lepa9MoAAAAAGSjQWQ3x7J6l0tkFxl6tjGtbeOC"></div>
                     <div class="mb-3">
                         <input class="btn btn-primary" type="submit" name="submit" value="Generate" style="height: 50px;" />
                     </div>
                 </form>
-    
         </div>
         <div class="row">
             <div class="container-xl"><%= status%></div>
@@ -57,6 +56,8 @@
             <a class="btn btn-primary btn-sm" href="./genqr/?user_url=<%= user_url %>" role="button">Download</a>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </section>
 </body>
 </html>
