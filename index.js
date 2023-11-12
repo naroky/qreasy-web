@@ -9,7 +9,7 @@ const app = express()
 const port = 3000//process.env.LISTEN_PORT
 app.disable('view cache');
 app.set('view engine', 'ejs')
-
+app.use('/asset/', express.static('asset'));
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
@@ -42,7 +42,7 @@ app.post('/createqr', (req, res) => {
   const secret_key = "6Lepa9MoAAAAACvgHqCh3i88y_ThcsZAF2_zmMfU"
   let status = 'Generate "'+user_url+'" is Success'
   let Qr_code ='<div class="row justify-content-center"><img src="./genqr/?user_url='+user_url+'" alt="QrCode" style="width:350px"/></div>'
-  let download = '<a class="btn btn-primary btn-sm" href="./genqr/?user_url='+user_url+'" role="button">Download</a>'
+  let download = '<button class="btn btn-primary btn-xl" href="./genqr/?user_url='+user_url+'" role="button">Download</button>'
   if (captcha.length === 0) 
   {
     status = "Please check the the captcha form."
